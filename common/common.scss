@@ -224,7 +224,7 @@ button.mfp-arrow {
 
 .mobile-view {
   // Close and Zoom button position
-  @if $close_zoom_button_position_mobile == "top right" {
+  @if $close-zoom-button-position-mobile == "top right" {
     .mfp-close-btn-in .mfp-close {
       @include button-position(10px, auto, auto, 10px);
     }
@@ -243,7 +243,7 @@ button.mfp-arrow {
     } 
   }
   
-  @if $close_zoom_button_position_mobile == "bottom right" {
+  @if $close-zoom-button-position-mobile == "bottom right" {
     .mfp-close-btn-in .mfp-close {
       @include button-position(auto, 10px, auto, 10px);
     }
