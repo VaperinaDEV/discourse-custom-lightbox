@@ -1,0 +1,282 @@
+@import "custom-lightbox-mixin";
+
+// Core
+
+.mfp-zoom-in.mfp-ready.mfp-bg {
+  opacity: 1;
+  background-color: #000;
+}
+
+.mfp-container {
+  position: fixed;
+  overflow: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.mfp-figure {
+  &:after {
+    top: 0;
+    bottom: 0;
+  }
+}
+
+img.mfp-img {
+  padding: 0;
+}
+
+.mfp-force-scrollbars {
+  .mfp-img {
+    max-width: 100%;
+  }
+}
+
+// Title
+
+.mfp-title {
+  display: none;
+}
+
+// Download button
+
+.image-source-link {
+  @include mfp-align;
+  left: 10px;
+  bottom: 10px;
+  .mobile-view & {
+    top: 10px;
+  }
+  @include mfp-bg-color-op;
+  font-size: 1.2em;
+  cursor: pointer;
+  @include mfp-btn-shadow(40px, 50%);
+  z-index: 1046;
+  &:hover {
+    opacity: 1;
+    color: #000;
+  }
+}
+
+// Counter
+
+.mfp-counter {
+  right: 10px;
+  left: auto;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  @include mfp-bg-color-op;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+}
+
+// Buttons
+
+.mfp-close-btn-in .mfp-close {
+  @include mfp-align;
+  right: 10px;
+  top: 10px;
+  .mobile-view & {
+    left: 10px;
+    bottom: 10px;
+    top: auto;
+  }
+  padding: 0;
+  @include mfp-bg-color-op;
+  @include mfp-btn-shadow(40px, 50%);
+  cursor: pointer !important;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+button.mfp-arrow {
+  margin: -54px 0 0;
+  top: calc(50% + 30px);
+  background: #fff;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+  padding: 0;
+  &:before {
+    display: none;
+  }
+  &:after {
+    content: "";
+    position: relative;
+    left: 16px;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    margin-top: unset;
+    margin-left: unset;
+  }
+}
+.mfp-arrow:before,
+.mfp-arrow:after,
+.mfp-arrow .mfp-b,
+.mfp-arrow .mfp-a {
+  border: medium;
+}
+
+.mfp-arrow-left {
+  left: 20px;
+  transform: rotate(-45deg);
+  @media screen and (max-width: 900px) {
+    left: 20px;
+    transform-origin: unset;
+    .mobile-view & {
+      left: 10px;
+    }
+  }
+  &:after {
+    top: 2px;
+    border-right: none;
+    margin-left: unset;
+  }
+  &:hover {
+    transform: translate3d(-5px, 0, 0) rotate(-45deg);
+    .mobile-view & {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.mfp-arrow-right {
+  right: 20px;
+  transform: rotate(135deg);
+  @media screen and (max-width: 900px) {
+    right: 20px;
+    transform-origin: unset;
+    .mobile-view & {
+      right: 10px;
+    }
+  }
+  &:after {
+    top: 2px;
+    border-left: none;
+    margin-left: unset;
+    margin-top: unset;
+  }
+  &:hover {
+    transform: translate3d(5px, 0, 0) rotate(135deg);
+    .mobile-view & {
+      transform: rotate(135deg);
+    }
+  }
+}
+
+.full-size-btn {
+  @include mfp-align;
+  right: 60px;
+  top: 10px;
+  .mobile-view & {
+    left: 60px;
+    bottom: 10px;
+    top: auto;
+  }
+  @include mfp-bg-color-op;
+  font-size: 1.2em;
+  z-index: 1046;
+  cursor: pointer;
+  @include mfp-btn-shadow(40px, 50%);
+  &:hover {
+    opacity: 1;
+  }
+  .minus-btn {
+    display: none;
+  }
+}
+
+.mfp-bottom-bar {
+  margin-top: -25px;
+}
+
+// Custom zoom
+
+.mfp-full-size-scrollbars {
+  .mfp-img {
+    max-width: none !important;
+    max-height: none !important;
+  }
+  .mfp-figure {
+    overflow: auto;
+    figure {
+      overflow: auto;
+    }
+  }
+  button.mfp-arrow {
+    position: fixed;
+  }
+  .full-size-btn {
+    .minus-btn {
+      display: block;
+    }
+    .plus-btn {
+      display: none;
+    }
+  }
+}
+
+// Buttons position on mobile
+
+.mobile-view {
+  // Close and Zoom button position
+  @if $close_zoom_button_position_mobile == "top right" {
+    .mfp-close-btn-in .mfp-close {
+      @include button-position(10px, auto, auto, 10px);
+    }
+    .full-size-btn {
+      @include button-position(10px, auto, auto, 60px);
+    }
+    @if $download-button-position-mobile == "bottom left" {
+      .image-source-link {
+        @include button-position(auto !important, 10px !important, 10px !important, auto !important);
+      }
+    }
+    @if $download-button-position-mobile == "top right" {
+      .image-source-link {
+        @include button-position(10px !important, auto !important, auto !important, 110px !important);
+      }
+    } 
+  }
+  
+  @if $close_zoom_button_position_mobile == "bottom right" {
+    .mfp-close-btn-in .mfp-close {
+      @include button-position(auto, 10px, auto, 10px);
+    }
+    .full-size-btn {
+      @include button-position(auto, 10px, auto, 60px);
+    }
+    // Download button position
+    @if $download-button-position-mobile == "bottom left" {
+      .image-source-link {
+        @include button-position(auto !important, 10px !important, 10px !important, auto !important);
+      }
+    }
+    @if $download-button-position-mobile == "bottom right" {
+      .image-source-link {
+        @include button-position(auto !important, 10px !important, auto !important, 110px !important);
+      }
+    }
+  }
+  
+  // Download button position
+  @if $download-button-position-mobile == "top right" {
+    .image-source-link {
+      @include button-position(10px, auto, auto, 10px);
+    }
+  }
+  @if $download-button-position-mobile == "bottom left" {
+    .image-source-link {
+      @include button-position(auto, 10px, 110px, auto);
+    }
+  }
+  @if $download-button-position-mobile == "bottom right" {
+    .image-source-link {
+      @include button-position(auto, 10px, auto, 10px);
+    }
+  }
+}

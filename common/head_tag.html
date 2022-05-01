@@ -1,0 +1,51 @@
+<script type="text/discourse-plugin" version="0.8.18">
+  $(document).ready(function() {
+    $("body").on("click keyup", function (e) {
+    
+      // Download button
+      const { iconHTML } = require("discourse-common/lib/icon-library");
+      let downloadIcon = iconHTML('download', { class: "mfp-prevent-close" });
+      const sourceLink = $(".mfp-container .image-source-link");
+      const sourceLinkSvg = $(".mfp-container .image-source-link svg");
+      const downloadLink = $('.mfp-title a.image-source-link[href*="short-url"]');
+      const appendedLink = $('.mfp-container a.image-source-link[href*="short-url"]');
+      
+      // Prevent close lightbox by clicking download button 
+      sourceLink.addClass("mfp-prevent-close");
+      
+      // Remove the last download button when change image in gallery
+      if (appendedLink.length > 1 || appendedLink.length > 1 && e.keyCode == 37 || appendedLink.length > 1 && e.keyCode == 39) {
+        appendedLink.last().remove();
+      }
+      
+      // Move download button to mfp-container so it will always a fixed position
+      $(".mfp-container").append(downloadLink);
+      
+      // Remove download text and only use icon
+      sourceLink.html(downloadIcon);
+      
+      // Move close button to mfp-container so it will always a fixed position
+      $(".mfp-container").append($(".mfp-close"));
+      
+      // Add zoom button
+      if ($(".full-size-btn").length <= 0){
+        $(".mfp-container").append('<div class="full-size-btn mfp-prevent-close"><span class="plus-btn mfp-prevent-close"><svg class="fa d-icon d-icon-search-plus svg-icon svg-node mfp-prevent-close" aria-hidden="true"><use xlink:href="#search-plus"></use></svg></span><span class="minus-btn mfp-prevent-close"><svg class="fa d-icon d-icon-search-minus svg-icon svg-node mfp-prevent-close" aria-hidden="true"><use xlink:href="#search-minus"></use></svg></span></div>');
+        $(".full-size-btn").click(function() {
+          $(".mfp-wrap").toggleClass("mfp-full-size-scrollbars");
+        });
+      }
+      
+      // Prevent image click zoom in desktop. Only can zoom with the zoom button.
+      $(document).on("click", ".mfp-img", function() {
+        $(".mfp-img").css("max-height", $(window).height());
+      });
+      
+      // If the image zoomed in, than click the image or the arrows will zoom out.
+      $(".mfp-img, .mfp-arrow").click(function() {
+        if ($(".mfp-wrap").hasClass("mfp-full-size-scrollbars")) {
+          $(".mfp-wrap").removeClass("mfp-full-size-scrollbars");
+        }
+      });
+    });
+  });
+</script>

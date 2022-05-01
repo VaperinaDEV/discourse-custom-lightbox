@@ -1,0 +1,20 @@
+svg_icons: 
+  default: "search-plus|search-minus"
+  type: "list"
+  list_type: "compact"
+  description: "Show zoom icons. For now these two icon can't be change. Please don't change this setting."
+close_zoom_button_position_mobile:
+  default: bottom left
+  type: enum
+  choices:
+    - top right
+    - bottom right 
+  description: "Close and Download button position on mobile."
+download_button_position_mobile:
+  default: top left
+  type: enum
+  choices:
+    - bottom left
+    - bottom right
+    - top right
+  description: "Download button position on mobile."
