@@ -1,8 +1,20 @@
+zoom_in_icon:
+  default: search-plus
+  type: "string"
+  description: "You can change the (zoom in) button icon here."
+zoom_out_icon:
+  default: search-minus
+  type: "string"
+  description: "You can change the (zoom out) button icon here."
+download_icon:
+  default: download
+  type: "string"
+  description: "You can change the (download) button icon here."
 svg_icons: 
   default: "search-plus|search-minus"
   type: "list"
   list_type: "compact"
-  description: "Show zoom icons. For now these two icon can't be change. Please don't change this setting."
+  description: "List of FontAwesome 5 icons used in this theme component"
 close_zoom_button_position_mobile:
   default: bottom left
   type: enum
