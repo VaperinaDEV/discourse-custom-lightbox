@@ -3,8 +3,8 @@ import { iconHTML } from "discourse-common/lib/icon-library";
 export default {
   name: "custom-lightbox",
   initialize() {
-    $("body").on("click keyup", function(e) {
-
+    $("body").on("click", function() {
+      
       // Custom Buttons
       const buttonsContainer = document.createElement('div');
       buttonsContainer.classList.add(
@@ -20,7 +20,7 @@ export default {
         class: "mfp-prevent-close"
       });
         
-      // Make Plus Button
+      // Create Plus Button
       const plusButton = document.createElement('button');
       plusButton.classList.add(
         "plus-btn",
@@ -30,7 +30,7 @@ export default {
       plusButton.innerHTML = zoomInIcon;
       buttonsContainer.append(plusButton);
         
-      // Make Minus Button
+      // Create Minus Button
       const minusButton = document.createElement('button');
       minusButton.classList.add(
         "minus-btn",
