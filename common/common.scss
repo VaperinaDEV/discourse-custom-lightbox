@@ -45,7 +45,7 @@ img.mfp-img {
   a.image-source-link {
     &:first-child {
       visibility: visible;
-      @include mfp-align;
+      position: fixed;
       @include button-position(auto, 0, 0, auto);
       .mobile-view & {
         @include button-position(0, auto, 0, auto);
