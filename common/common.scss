@@ -41,6 +41,14 @@ img.mfp-img {
 
 .mfp-title {
   visibility: hidden;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+  padding: 0;
   // Download button
   a.image-source-link {
     &:first-child {
