@@ -2,15 +2,23 @@ import { iconHTML } from "discourse-common/lib/icon-library";
 
 export default {
   name: "custom-lightbox",
-  initialize() {    
+  initialize() {
     $("body").on("click keyup", function(e) {
 
       // Custom Buttons
       const buttonsContainer = document.createElement('div');
-      buttonsContainer.className = "full-size-btn mfp-prevent-close";
+      buttonsContainer.classList.add(
+        "full-size-btn",
+        "mfp-prevent-close"
+      );
         
-      let zoomInIcon = iconHTML(settings.zoom_in_icon, { class: "mfp-prevent-close " });
-      let zoomOutIcon = iconHTML(settings.zoom_out_icon, { class: "mfp-prevent-close " });
+      let zoomInIcon = iconHTML(settings.zoom_in_icon, {
+        class: "mfp-prevent-close" 
+      });
+      
+      let zoomOutIcon = iconHTML(settings.zoom_out_icon, {
+        class: "mfp-prevent-close"
+      });
         
       // Make Plus Button
       const plusButton = document.createElement('button');
@@ -33,7 +41,9 @@ export default {
       buttonsContainer.append(minusButton);
 
       // Download button
-      let downloadIcon = iconHTML(settings.download_icon, { class: "mfp-prevent-close" });
+      let downloadIcon = iconHTML(settings.download_icon, {
+        class: "mfp-prevent-close"
+      });
       const sourceLink = $(".mfp-container .image-source-link");
       const downloadLink = $('.mfp-title a.image-source-link[href*="short-url"]');
       const appendedLink = $('.mfp-container a.image-source-link[href*="short-url"]');
@@ -80,9 +90,9 @@ export default {
         mfpImg.css("max-height", $(window).height());
       });
                 
-      const mfpArrowAndImg = $(".mfp-img, .mfp-arrow");       
+      const mfpImgAndArrow = $(".mfp-img, .mfp-arrow");       
       // If the image zoomed in, than click the image or the arrows will zoom out.
-      mfpArrowAndImg.click(function() {
+      mfpImgAndArrow.click(function() {
         if (mfpWrap.hasClass("mfp-full-size-scrollbars")) {
           mfpWrap.removeClass("mfp-full-size-scrollbars");
         }
