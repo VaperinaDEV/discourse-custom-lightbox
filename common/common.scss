@@ -33,27 +33,33 @@ img.mfp-img {
 
 // Title
 
-.mfp-title {
-  display: none;
+@if $hide-download-button == "true" {
+  .mfp-title {
+    display: none;
+  }
 }
 
-// Download button
-
-.image-source-link {
-  @include mfp-align;
-  left: 10px;
-  bottom: 10px;
-  .mobile-view & {
-    top: 10px;
-  }
-  @include mfp-bg-color-op;
-  font-size: 1.2em;
-  cursor: pointer;
-  @include mfp-btn-shadow(40px, 50%);
-  z-index: 1046;
-  &:hover {
-    opacity: 1;
-    color: #000;
+.mfp-title {
+  visibility: hidden;
+  // Download button
+  a.image-source-link {
+    &:first-child {
+      visibility: visible;
+      position: fixed;
+      @include button-position(auto, 0, 0, auto);
+      .mobile-view & {
+        @include button-position(0, auto, 0, auto);
+      }
+      @include mfp-bg-color-op;
+      font-size: var(--font-down-2);
+      cursor: pointer;
+      border: 5px solid transparent;
+      z-index: 1046;
+      &:hover {
+        opacity: 1;
+        color: #000;
+      }
+    }
   }
 }
 
@@ -225,59 +231,26 @@ button.mfp-arrow {
 
 .mobile-view {
   // Close and Zoom button position
-  @if $close-zoom-button-position-mobile == "top right" {
+  @if $buttons-position-mobile == "close and zoom top right, download top left" {
     .mfp-close-btn-in .mfp-close {
       @include button-position(10px, auto, auto, 10px);
     }
     .full-size-btn {
       @include button-position(10px, auto, auto, 60px);
     }
-    @if $download-button-position-mobile == "bottom left" {
-      .image-source-link {
-        @include button-position(auto !important, 10px !important, 10px !important, auto !important);
-      }
-    }
-    @if $download-button-position-mobile == "top right" {
-      .image-source-link {
-        @include button-position(10px !important, auto !important, auto !important, 110px !important);
-      }
-    } 
-  }
-  
-  @if $close-zoom-button-position-mobile == "bottom right" {
-    .mfp-close-btn-in .mfp-close {
-      @include button-position(auto, 10px, auto, 10px);
-    }
-    .full-size-btn {
-      @include button-position(auto, 10px, auto, 60px);
-    }
-    // Download button position
-    @if $download-button-position-mobile == "bottom left" {
-      .image-source-link {
-        @include button-position(auto !important, 10px !important, 10px !important, auto !important);
-      }
-    }
-    @if $download-button-position-mobile == "bottom right" {
-      .image-source-link {
-        @include button-position(auto !important, 10px !important, auto !important, 110px !important);
-      }
-    }
-  }
-  
-  // Download button position
-  @if $download-button-position-mobile == "top right" {
     .image-source-link {
+      @include button-position(0 !important, auto !important, 0 !important, auto !important);
+    }
+  }
+  @if $buttons-position-mobile == "close and zoom top right, download bottom left" {
+    .mfp-close-btn-in .mfp-close {
       @include button-position(10px, auto, auto, 10px);
     }
-  }
-  @if $download-button-position-mobile == "bottom left" {
-    .image-source-link {
-      @include button-position(auto, 10px, 110px, auto);
+    .full-size-btn {
+      @include button-position(10px, auto, auto, 60px);
     }
-  }
-  @if $download-button-position-mobile == "bottom right" {
     .image-source-link {
-      @include button-position(auto, 10px, auto, 10px);
+      @include button-position(auto !important, 0 !important, 0 !important, auto !important);
     }
   }
 }

@@ -13,7 +13,7 @@ export default {
       );
         
       let zoomInIcon = iconHTML(settings.zoom_in_icon, {
-        class: "mfp-prevent-close" 
+        class: "mfp-prevent-close"
       });
       
       let zoomOutIcon = iconHTML(settings.zoom_out_icon, {
@@ -40,36 +40,7 @@ export default {
       minusButton.innerHTML = zoomOutIcon;
       buttonsContainer.append(minusButton);
 
-      // Download button
-      let downloadIcon = iconHTML(settings.download_icon, {
-        class: "mfp-prevent-close"
-      });
-      const sourceLink = $(".mfp-container .image-source-link");
-      const downloadLink = $('.mfp-title a.image-source-link[href*="short-url"]');
-      const appendedLink = $('.mfp-container a.image-source-link[href*="short-url"]');
-
-      // Prevent close lightbox by clicking download button 
-      sourceLink.addClass("mfp-prevent-close");
-      // Add title to download button
-      sourceLink.title = I18n.t("lightbox.download");
-
-      // Remove the last download button when change image in gallery
-      if (
-        appendedLink.length > 1 ||
-        appendedLink.length > 1 &&
-        e.keyCode == 37 ||
-        appendedLink.length > 1 &&
-        e.keyCode == 39
-      ) {
-        appendedLink.last().remove();
-      }
-        
       const mfpContainer = $(".mfp-container");
-      // Move download button to mfp-container so it will always a fixed position
-      mfpContainer.append(downloadLink);
-
-      // Remove download text and only use icon
-      sourceLink.html(downloadIcon);
         
       const mfpClose = $(".mfp-close");
       // Move close button to mfp-container so it will always a fixed position
