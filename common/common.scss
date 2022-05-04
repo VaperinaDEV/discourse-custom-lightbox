@@ -170,23 +170,24 @@ button.mfp-arrow {
 
 .full-size-btn {
   @include mfp-align;
-  right: 60px;
-  top: 10px;
-  .mobile-view & {
-    left: 60px;
-    bottom: 10px;
-    top: auto;
-  }
-  @include mfp-bg-color-op;
-  font-size: 1.2em;
+  @include button-position(10px, auto, auto, 60px);
   z-index: 1046;
-  cursor: pointer;
-  @include mfp-btn-shadow(40px, 50%);
-  &:hover {
-    opacity: 1;
+  .mobile-view & {
+    @include button-position(auto, 10px, 60px, auto);
   }
-  .minus-btn {
-    display: none;
+  button {
+    @include mfp-bg-color-op;
+    font-size: 1.2em;
+    cursor: pointer;
+    @include mfp-btn-shadow(40px, 50%);
+    line-height: normal;
+    border: none;
+    &:hover {
+      opacity: 1;
+    }
+    &.minus-btn {
+      display: none;
+    }
   }
 }
 
