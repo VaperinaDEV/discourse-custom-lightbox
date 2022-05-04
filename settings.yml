@@ -6,27 +6,18 @@ zoom_out_icon:
   default: search-minus
   type: "string"
   description: "You can change the (zoom out) button icon here."
-download_icon:
-  default: download
-  type: "string"
-  description: "You can change the (download) button icon here."
 svg_icons: 
   default: "search-plus|search-minus"
   type: "list"
   list_type: "compact"
   description: "List of FontAwesome 5 icons used in this theme component"
-close_zoom_button_position_mobile:
-  default: bottom left
+hide_download_button:
+  default: false
+  type: "bool"
+buttons_position_mobile:
+  default: close and zoom bottom left, download top left
   type: enum
   choices:
-    - top right
-    - bottom right 
-  description: "Close and Download button position on mobile."
-download_button_position_mobile:
-  default: top left
-  type: enum
-  choices:
-    - bottom left
-    - bottom right
-    - top right
-  description: "Download button position on mobile."
+    - close and zoom top right, download top left
+    - close and zoom top right, download bottom left
+  description: "Close, Zoom and Download buttons position on mobile."
