@@ -94,6 +94,8 @@ img.mfp-img {
   top: 20px;
   .mobile-view & {
     display: flex;
+    align-items: center;
+    justify-content: center;
     left: 10px;
     bottom: 10px;
     top: auto;
