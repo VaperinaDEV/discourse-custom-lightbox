@@ -87,10 +87,13 @@ img.mfp-img {
 // Buttons
 
 .mfp-close-btn-in .mfp-close {
-  @include mfp-align;
-  right: 10px;
-  top: 10px;
+  display: block;
+  position: fixed;
+  text-align: center;
+  right: 20px;
+  top: 20px;
   .mobile-view & {
+    display: flex;
     left: 10px;
     bottom: 10px;
     top: auto;
@@ -183,18 +186,20 @@ button.mfp-arrow {
 }
 
 .full-size-btn {
-  @include mfp-align;
-  @include button-position(10px, auto, auto, 60px);
+  position: fixed;
+  @include button-position(20px, auto, auto, 70px);
   z-index: 1046;
   .mobile-view & {
     @include button-position(auto, 10px, 60px, auto);
   }
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include mfp-bg-color-op;
     font-size: 1.2em;
     cursor: pointer;
     @include mfp-btn-shadow(40px, 50%);
-    line-height: normal;
     border: none;
     &:hover {
       opacity: 1;
@@ -227,7 +232,7 @@ button.mfp-arrow {
   }
   .full-size-btn {
     .minus-btn {
-      display: block;
+      display: flex;
     }
     .plus-btn {
       display: none;
