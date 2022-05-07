@@ -5,13 +5,14 @@ export default {
   initialize() {
     $("body").on("click", function() {
       
-      // Custom Buttons
+      // Create zoom buttons container
       const buttonsContainer = document.createElement('div');
       buttonsContainer.classList.add(
         "full-size-btn",
         "mfp-prevent-close"
       );
-        
+      
+      // Create icons 
       let zoomInIcon = iconHTML(settings.zoom_in_icon, {
         class: "mfp-prevent-close"
       });
@@ -19,7 +20,9 @@ export default {
       let zoomOutIcon = iconHTML(settings.zoom_out_icon, {
         class: "mfp-prevent-close"
       });
-        
+      
+      let closeIcon = iconHTML(settings.close_icon);
+      
       // Create Plus Button
       const plusButton = document.createElement('button');
       plusButton.classList.add(
@@ -39,30 +42,36 @@ export default {
       minusButton.title = I18n.t(themePrefix("zoom_out_button_title"));
       minusButton.innerHTML = zoomOutIcon;
       buttonsContainer.append(minusButton);
+      
+      // Create Close Button
+      const closeButton = document.createElement('button');
+      closeButton.classList.add(
+        "close-btn"
+      );
+      closeButton.title = I18n.t(themePrefix("close_button_title"));
+      closeButton.innerHTML = closeIcon;
 
-      const mfpContainer = $(".mfp-container");
-        
-      const mfpClose = $(".mfp-close");
-      // Move close button to mfp-container so it will always a fixed position
-      mfpContainer.append(mfpClose);
-
+      // Add buttons function
       const mfpWrap = $(".mfp-wrap");
-      // Add zoom button function
+      const mfpContainer = $(".mfp-container");
       if ($(".full-size-btn").length <= 0){
         mfpContainer.append(buttonsContainer);
         $(".full-size-btn").click(function() {
           mfpWrap.toggleClass("mfp-full-size-scrollbars");
         });
       }
-        
-      const mfpImg = $(".mfp-img");
+      if ($(".close-btn").length <= 0) {
+        mfpContainer.append(closeButton);
+      }      
+      
       // Prevent image click zoom in desktop. Only can zoom with the zoom button.
+      const mfpImg = $(".mfp-img");
       $(document).on("click", ".mfp-img", function() {
         mfpImg.css("max-height", $(window).height());
       });
-                
-      const mfpImgAndArrow = $(".mfp-img, .mfp-arrow");       
+      
       // If the image zoomed in, than click the image or the arrows will zoom out.
+      const mfpImgAndArrow = $(".mfp-img, .mfp-arrow");
       mfpImgAndArrow.click(function() {
         if (mfpWrap.hasClass("mfp-full-size-scrollbars")) {
           mfpWrap.removeClass("mfp-full-size-scrollbars");

@@ -6,6 +6,10 @@ zoom_out_icon:
   default: search-minus
   type: "string"
   description: "You can change the (zoom out) button icon here."
+close_icon:
+  default: times
+  type: "string"
+  description: "You can change the (close) button icon here."  
 svg_icons: 
   default: "search-plus|search-minus"
   type: "list"

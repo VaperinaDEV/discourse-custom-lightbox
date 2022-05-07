@@ -14,6 +14,12 @@
   opacity: .65;
 }
 
+@mixin mfp-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 // Mobile Buttons Position
 
 @mixin button-position($top, $bottom, $left, $right) {
