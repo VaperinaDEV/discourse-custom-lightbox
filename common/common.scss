@@ -87,23 +87,26 @@ img.mfp-img {
 // Buttons
 
 .mfp-close-btn-in .mfp-close {
-  display: block;
+  display: none;
+}
+
+.close-btn {
+  @include mfp-align;
   position: fixed;
-  text-align: center;
   right: 20px;
   top: 20px;
+  font-size: 1.2em;
+  border: none;
+  padding: 0;
+  @include mfp-bg-color-op;
+  @include mfp-btn-shadow(40px, 50%);
+  cursor: pointer;
+  z-index: 1046;
   .mobile-view & {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     left: 10px;
     bottom: 10px;
     top: auto;
   }
-  padding: 0;
-  @include mfp-bg-color-op;
-  @include mfp-btn-shadow(40px, 50%);
-  cursor: pointer !important;
   &:hover {
     opacity: 1;
   }
@@ -195,13 +198,11 @@ button.mfp-arrow {
     @include button-position(auto, 10px, 60px, auto);
   }
   button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include mfp-align;
     @include mfp-bg-color-op;
+    @include mfp-btn-shadow(40px, 50%);
     font-size: 1.2em;
     cursor: pointer;
-    @include mfp-btn-shadow(40px, 50%);
     border: none;
     &:hover {
       opacity: 1;
@@ -247,7 +248,7 @@ button.mfp-arrow {
 .mobile-view {
   // Close and Zoom button position
   @if $buttons-position-mobile == "close and zoom top right, download top left" {
-    .mfp-close-btn-in .mfp-close {
+    .close-btn {
       @include button-position(10px, auto, auto, 10px);
     }
     .full-size-btn {
@@ -258,7 +259,7 @@ button.mfp-arrow {
     }
   }
   @if $buttons-position-mobile == "close and zoom top right, download bottom left" {
-    .mfp-close-btn-in .mfp-close {
+    .close-btn {
       @include button-position(10px, auto, auto, 10px);
     }
     .full-size-btn {
