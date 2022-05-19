@@ -35,7 +35,7 @@ img.mfp-img {
 
 @if $hide-download-button == "true" {
   .mfp-title {
-    display: none;
+    display: none !important;
   }
 }
 
