@@ -19,10 +19,6 @@ hide_download_button:
   default: false
   type: "bool"
   description: "Hide download button."
-show_download_button_pm:
-  default: false
-  type: "bool"
-  description: "Show download button on personal messages."
 buttons_position_mobile:
   default: close and zoom bottom left, download top left
   type: enum

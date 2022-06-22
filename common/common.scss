@@ -36,9 +36,6 @@ img.mfp-img {
 @if $hide-download-button == "true" {
   .mfp-title {
     display: none !important;
-    @if $show-download-button-pm == "true" {
-      display: -webkit-box !important;
-    }
   }
 }
 
