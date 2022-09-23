@@ -95,7 +95,7 @@ img.mfp-img {
   display: none;
 }
 
-.close-btn {
+.close-lightbox-btn {
   @include mfp-align;
   position: fixed;
   right: 20px;
@@ -253,7 +253,7 @@ button.mfp-arrow {
 .mobile-view {
   // Close and Zoom button position
   @if $buttons-position-mobile == "close and zoom top right, download top left" {
-    .close-btn {
+    .close-lightbox-btn {
       @include button-position(10px, auto, auto, 10px);
     }
     .full-size-btn {
@@ -264,7 +264,7 @@ button.mfp-arrow {
     }
   }
   @if $buttons-position-mobile == "close and zoom top right, download bottom left" {
-    .close-btn {
+    .close-lightbox-btn {
       @include button-position(10px, auto, auto, 10px);
     }
     .full-size-btn {
