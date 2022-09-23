@@ -46,7 +46,7 @@ export default {
       // Create Close Button
       const closeButton = document.createElement('button');
       closeButton.classList.add(
-        "close-btn"
+        "close-lightbox-btn"
       );
       closeButton.title = I18n.t(themePrefix("close_button_title"));
       closeButton.innerHTML = closeIcon;
@@ -60,7 +60,7 @@ export default {
           mfpWrap.toggleClass("mfp-full-size-scrollbars");
         });
       }
-      if ($(".close-btn").length <= 0) {
+      if ($(".close-lightbox-btn").length <= 0) {
         mfpContainer.append(closeButton);
       }      
       
