@@ -1,7 +1,6 @@
 @import "custom-lightbox-mixin";
 
 // Core
-
 .mfp-zoom-in.mfp-ready.mfp-bg {
   opacity: 1;
   background-color: #000;
@@ -21,18 +20,27 @@
   }
 }
 
+// Use zoom cursor on image
+.mfp-gallery {
+  .mfp-image-holder {
+    .mfp-figure {
+      cursor: zoom-in;
+    }
+  }
+  &.mfp-force-scrollbars {
+    .mfp-image-holder {
+      .mfp-figure {
+        cursor: zoom-out;
+      }
+    }
+  }
+}
+
 img.mfp-img {
   padding: 0;
 }
 
-.mfp-force-scrollbars {
-  .mfp-img {
-    max-width: 100%;
-  }
-}
-
 // Title
-
 @if $hide-download-button == "true" {
   .mfp-title {
     display: none !important;
@@ -77,7 +85,6 @@ img.mfp-img {
 }
 
 // Counter
-
 .mfp-counter {
   right: 10px;
   left: auto;
@@ -90,7 +97,6 @@ img.mfp-img {
 }
 
 // Buttons
-
 .mfp-close-btn-in .mfp-close {
   display: none;
 }
@@ -223,12 +229,7 @@ button.mfp-arrow {
 }
 
 // Custom zoom
-
-.mfp-full-size-scrollbars {
-  .mfp-img {
-    max-width: none !important;
-    max-height: none !important;
-  }
+.mfp-force-scrollbars {
   .mfp-figure {
     overflow: auto;
     figure {
@@ -249,7 +250,6 @@ button.mfp-arrow {
 }
 
 // Buttons position on mobile
-
 .mobile-view {
   // Close and Zoom button position
   @if $buttons-position-mobile == "close and zoom top right, download top left" {
