@@ -1,20 +1,20 @@
 zoom_in_icon:
-  default: search-plus
+  default: "magnifying-glass-plus"
   type: "string"
   description: "You can change the (zoom in) button icon here."
 zoom_out_icon:
-  default: search-minus
+  default: "magnifying-glass-minus"
   type: "string"
   description: "You can change the (zoom out) button icon here."
 close_icon:
-  default: times
+  default: "xmark"
   type: "string"
   description: "You can change the (close) button icon here."  
 svg_icons: 
-  default: "search-plus|search-minus"
+  default: "magnifying-glass-plus|magnifying-glass-minus"
   type: "list"
   list_type: "compact"
-  description: "List of FontAwesome 5 icons used in this theme component"
+  description: "List of FontAwesome 6 icons used in this theme component"
 hide_download_button:
   default: false
   type: "bool"
@@ -24,8 +24,8 @@ show_download_button_pm:
   type: "bool"
   description: "Show download button on personal messages."
 buttons_position_mobile:
-  default: close and zoom bottom left, download top left
-  type: enum
+  default: "close and zoom bottom left, download top left"
+  type: "enum"
   choices:
     - close and zoom top right, download top left
     - close and zoom top right, download bottom left
