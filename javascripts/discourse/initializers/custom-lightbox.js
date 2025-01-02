@@ -11,17 +11,29 @@ export default {
       attributeFilter: ["class"]
     });
 
+    // Variable to store the original theme color
+    let originalThemeColor;
+
     // Function to handle class changes in the body element
     function handleBodyClassChanges(mutations) {
       mutations.forEach((mutation) => {
         if (mutation.target.classList.contains("mfp-zoom-out-cur")) {
           setupLightbox();
+        } else if (!mutation.target.classList.contains("mfp-zoom-out-cur")) {
+          restoreThemeColor();
         }
       });
     }
 
     // Function to set up the custom lightbox
     function setupLightbox() {
+      // Change theme color to black
+      const siteThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (siteThemeColor) {
+        originalThemeColor = siteThemeColor.getAttribute("content");
+        siteThemeColor.setAttribute("content", "#000000");
+      }
+
       // Create a container for the zoom buttons
       const buttonsContainer = createButtonsContainer();
       const mfpWrap = document.querySelector(".mfp-wrap");
@@ -30,10 +42,12 @@ export default {
       // Function to update the image style based on zoom state
       function updateImageStyle(isZoomed) {
         const mfpImg = document.querySelector(".mfp-img");
-        if (isZoomed) {
-          mfpImg.style.maxHeight = "none";
-        } else {
-          mfpImg.style.maxHeight = `${window.innerHeight}px`;
+        if (mfpImg) {  // Ensure the element exists
+          if (isZoomed) {
+            mfpImg.style.maxHeight = "none";
+          } else {
+            mfpImg.style.maxHeight = `${window.innerHeight}px`;
+          }
         }
       }
 
@@ -89,6 +103,14 @@ export default {
       if (!document.querySelector(".close-lightbox-btn")) {
         const closeButton = createCloseButton();
         mfpContainer.append(closeButton);
+      }
+    }
+
+    // Function to restore the original theme color
+    function restoreThemeColor() {
+      const siteThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (siteThemeColor && originalThemeColor) {
+        siteThemeColor.setAttribute("content", originalThemeColor);
       }
     }
 
