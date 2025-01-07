@@ -2,3 +2,5 @@ en:
   zoom_in_button_title: "Zoom In"
   zoom_out_button_title: "Zoom Out"
   close_button_title: "Close (Esc)"
+  fullscreen_button_title: "Fullscreen mode (F)"
+  toggle_title_button_title: "Toggle Info"
