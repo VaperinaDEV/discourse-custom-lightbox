@@ -1,99 +1,92 @@
-@import "custom-lightbox-mixin";
-
-// Core
-.mfp-zoom-in.mfp-ready.mfp-bg {
-  opacity: 1;
-  background-color: #000;
-}
-
-.mfp-container {
-  position: fixed;
-  overflow: auto;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.mfp-figure {
-  &:after {
-    top: 0;
-    bottom: 0;
-  }
-}
-
-// Use zoom cursor on image
-.mfp-gallery {
-  .mfp-image-holder {
-    .mfp-figure {
-      cursor: zoom-in;
-    }
-  }
-  &.mfp-force-scrollbars {
-    .mfp-image-holder {
-      .mfp-figure {
-        cursor: zoom-out;
-      }
-    }
-  }
-}
-
-img.mfp-img {
-  padding: 0;
-}
-
-// Title
-@if $hide-download-button == "true" {
-  .mfp-title {
-    display: none !important;
-    @if $show-download-button-pm == "true" {
-      .archetype-private_message & {
-        display: -webkit-box !important;
-      }
-    }
-  }
-}
-
-.mfp-title {
-  visibility: hidden;
-  display: -webkit-box;
+.mfp-zoom-out-cur {
+  --lightbox-bg-color: #000;
+  --lightbox-icon-color: #ccc;
+  --lightbox-z-index: 1046;
+  
   overflow: hidden;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  max-width: 100%;
-  padding: 0;
-  // Download button
-  a.image-source-link {
-    &:first-child {
-      visibility: visible;
+  touch-action: none;
+  
+  .mfp-zoom-in.mfp-ready.mfp-bg {
+    opacity: 1;
+  }
+  
+  .mfp-wrap {
+    .mfp-image-holder {
       position: fixed;
-      @include button-position(auto, 0, 0, auto);
-      .mobile-view & {
-        @include button-position(0, auto, 0, auto);
+      padding-left: 0px;
+      padding-right: 0px;
+      overflow: hidden;
+      
+      .mfp-figure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--lightbox-bg-color);
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        &:after {
+          top: 0;
+          bottom: 0;
+        }
+
+        img.mfp-img {
+          cursor: zoom-in;
+          pointer-events: auto;
+        }
+
+        .mfp-bottom-bar {
+          position: fixed;
+          top: auto;
+          margin-top: unset;
+          pointer-events: auto;
+          .mfp-title {
+            position: fixed;
+            bottom: 50px;
+            margin-left: 1em;
+            margin-right: 1em;
+            max-height: 15em;
+            max-width: 40em;
+            overflow: auto;
+            visibility: hidden;
+            background: var(--lightbox-bg-color);
+            color: var(--lightbox-icon-color);
+            font-size: var(--font-down-1);
+            padding: 0.5em;
+          }     
+          .mfp-counter {
+            position: fixed;
+            right: auto;
+            left: 1em;
+            top: 1em;
+            bottom: auto;
+            color: var(--lightbox-icon-color);
+          }
+        }
       }
-      @include mfp-bg-color-op;
-      font-size: var(--font-down-2);
-      cursor: pointer;
-      border: 5px solid transparent;
-      z-index: 1046;
-      &:hover {
-        opacity: 1;
-        color: #000;
+    }
+
+    &.mfp-force-scrollbars {
+      .mfp-image-holder {
+        .mfp-figure {
+          .discourse-touch & {
+            pointer-events: auto;
+          }
+          img.mfp-img {
+            padding: 0;
+            cursor: zoom-out;
+          }
+          .mfp-bottom-bar {
+            display: none;
+          }
+        }
       }
     }
   }
-}
 
-// Counter
-.mfp-counter {
-  right: 10px;
-  left: auto;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  @include mfp-bg-color-op;
-  border-radius: 4px;
-  font-weight: bold;
-  text-align: center;
+  .mfp-preloader {
+    z-index: 1045;
+  }
 }
 
 // Buttons
@@ -101,48 +94,104 @@ img.mfp-img {
   display: none;
 }
 
-.close-lightbox-btn {
-  @include mfp-align;
+.lightbox-control-buttons-top {
   position: fixed;
-  right: 20px;
-  top: 20px;
-  font-size: 1.2em;
-  border: none;
-  padding: 0;
-  @include mfp-bg-color-op;
-  @include mfp-btn-shadow(40px, 50%);
-  cursor: pointer;
-  z-index: 1046;
-  .mobile-view & {
-    left: 10px;
-    bottom: 10px;
-    top: auto;
+  display: flex;
+  top: 0.5em;
+  right: 0.5em;
+  z-index: var(--lightbox-z-index);
+  .mfp-force-scrollbars & {
+    display: none;
   }
-  &:hover {
-    opacity: 1;
+  .btn {
+    cursor: pointer;
+    .d-icon {
+      color: var(--lightbox-icon-color);
+    }
+    .discourse-no-touch & {
+      &:hover,
+      &:focus {
+        .d-icon {
+          color: var(--tertiary);
+        }
+      }
+    }
   }
 }
 
+.full-size-btn {
+  position: fixed;
+  bottom: 0.5em;
+  right: 0.5em;
+  z-index: var(--lightbox-z-index);
+  .btn {
+    cursor: pointer;
+    .d-icon {
+      color: var(--lightbox-icon-color);
+    }
+    .discourse-no-touch & {
+      &:hover,
+      &:focus {
+        .d-icon {
+          color: var(--tertiary);
+        }
+      }
+    }
+  }
+}
+
+.title-toggle-container {
+  position: fixed;
+  bottom: 0.5em;
+  left: 0.5em;
+  z-index: var(--lightbox-z-index);
+  .mfp-force-scrollbars & {
+    display: none;
+  }
+  .btn {
+    cursor: pointer;
+    .d-icon {
+      color: var(--lightbox-icon-color);
+    }
+    .discourse-no-touch & {
+      &:hover,
+      &:focus {
+        .d-icon {
+          color: var(--tertiary);
+        }
+      }
+    }
+  }
+}
+
+// Arrows
 button.mfp-arrow {
-  margin: -54px 0 0;
-  top: calc(50% + 30px);
-  background: #fff;
-  height: 45px;
-  width: 45px;
+  margin: -13px 0 0;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  transition: all 0.2s linear;
+  transition: all .2s linear;
   padding: 0;
+  &:active {
+    margin-top: -13px;
+  }
+  .mfp-force-scrollbars & {
+    display: none;
+  }
+  .mobile-view & {
+    display: none;
+  }
   &:before {
     display: none;
   }
   &:after {
     content: "";
     position: relative;
-    left: 16px;
-    width: 15px;
-    height: 15px;
-    border-top: 2px solid #000;
-    border-left: 2px solid #000;
+    left: 0.5em;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--lightbox-icon-color);
+    border-left: 2px solid var(--lightbox-icon-color);
     margin-top: unset;
     margin-left: unset;
   }
@@ -155,77 +204,24 @@ button.mfp-arrow {
 }
 
 .mfp-arrow-left {
-  left: 20px;
+  left: 1em;
   transform: rotate(-45deg);
-  @media screen and (max-width: 900px) {
-    left: 20px;
-    transform-origin: unset;
-    .mobile-view & {
-      left: 10px;
-    }
-  }
   &:after {
     top: 2px;
     border-right: none;
     margin-left: unset;
   }
-  &:hover {
-    transform: translate3d(-5px, 0, 0) rotate(-45deg);
-    .mobile-view & {
-      transform: rotate(-45deg);
-    }
-  }
 }
 
 .mfp-arrow-right {
-  right: 20px;
+  right: 1em;
   transform: rotate(135deg);
-  @media screen and (max-width: 900px) {
-    right: 20px;
-    transform-origin: unset;
-    .mobile-view & {
-      right: 10px;
-    }
-  }
   &:after {
     top: 2px;
     border-left: none;
     margin-left: unset;
     margin-top: unset;
   }
-  &:hover {
-    transform: translate3d(5px, 0, 0) rotate(135deg);
-    .mobile-view & {
-      transform: rotate(135deg);
-    }
-  }
-}
-
-.full-size-btn {
-  position: fixed;
-  @include button-position(20px, auto, auto, 70px);
-  z-index: 1046;
-  .mobile-view & {
-    @include button-position(auto, 10px, 60px, auto);
-  }
-  button {
-    @include mfp-align;
-    @include mfp-bg-color-op;
-    @include mfp-btn-shadow(40px, 50%);
-    font-size: 1.2em;
-    cursor: pointer;
-    border: none;
-    &:hover {
-      opacity: 1;
-    }
-    &.minus-btn {
-      display: none;
-    }
-  }
-}
-
-.mfp-bottom-bar {
-  margin-top: -25px;
 }
 
 // Custom zoom
@@ -238,40 +234,5 @@ button.mfp-arrow {
   }
   button.mfp-arrow {
     position: fixed;
-  }
-  .full-size-btn {
-    .minus-btn {
-      display: flex;
-    }
-    .plus-btn {
-      display: none;
-    }
-  }
-}
-
-// Buttons position on mobile
-.mobile-view {
-  // Close and Zoom button position
-  @if $buttons-position-mobile == "close and zoom top right, download top left" {
-    .close-lightbox-btn {
-      @include button-position(10px, auto, auto, 10px);
-    }
-    .full-size-btn {
-      @include button-position(10px, auto, auto, 60px);
-    }
-    .image-source-link {
-      @include button-position(0 !important, auto !important, 0 !important, auto !important);
-    }
-  }
-  @if $buttons-position-mobile == "close and zoom top right, download bottom left" {
-    .close-lightbox-btn {
-      @include button-position(10px, auto, auto, 10px);
-    }
-    .full-size-btn {
-      @include button-position(10px, auto, auto, 60px);
-    }
-    .image-source-link {
-      @include button-position(auto !important, 0 !important, 0 !important, auto !important);
-    }
   }
 }
