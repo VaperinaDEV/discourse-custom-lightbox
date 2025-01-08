@@ -12,10 +12,7 @@
   
   .mfp-wrap {
     .mfp-image-holder {
-      position: fixed;
-      padding-left: 0px;
-      padding-right: 0px;
-      overflow: hidden;
+      padding: 0;
       
       .mfp-figure {
         display: flex;
