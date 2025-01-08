@@ -8,9 +8,15 @@
   
   .mfp-zoom-in.mfp-ready.mfp-bg {
     opacity: 1;
+    position: fixed !important;
+    height: 100% !important;
   }
   
   .mfp-wrap {
+    position: fixed !important;
+    top: 0 !important;
+    height: 100% !important;
+    
     .mfp-image-holder {
       padding: 0;
       
@@ -66,6 +72,8 @@
     &.mfp-force-scrollbars {
       .mfp-image-holder {
         .mfp-figure {
+          width: unset;
+          height: unset;
           .discourse-touch & {
             pointer-events: auto;
           }
