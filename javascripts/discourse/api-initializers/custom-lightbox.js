@@ -292,6 +292,61 @@ export default apiInitializer("1.8.0", (api) => {
       controlButtonsTopContainer.append(closeButton);
       mfpContainer.append(controlButtonsTopContainer);
     }
+
+    function enableMouseScroll(container) {
+      if (capabilities.touch) return;
+      if (!container) return;
+
+      let targetScrollLeft = 0;
+      let targetScrollTop = 0;
+      let currentScrollLeft = 0;
+      let currentScrollTop = 0;
+      
+      document.addEventListener("mousemove", (event) => {
+        if (!container.classList.contains("mfp-force-scrollbars")) return;
+    
+        const rect = container.getBoundingClientRect();
+        const mouseX = (event.clientX - rect.left) / rect.width;  // 0-1
+        const mouseY = (event.clientY - rect.top) / rect.height; // 0-1
+    
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        const maxScrollTop = container.scrollHeight - container.clientHeight;
+    
+        // Set targetpoints
+        targetScrollLeft = maxScrollLeft * mouseX;
+        targetScrollTop = maxScrollTop * mouseY;
+      });
+
+      function smoothScroll() {
+        // LERP (Linear Interpolation)
+        currentScrollLeft += (targetScrollLeft - currentScrollLeft) * 0.1;
+        currentScrollTop += (targetScrollTop - currentScrollTop) * 0.1;
+    
+        container.scrollLeft = currentScrollLeft;
+        container.scrollTop = currentScrollTop;
+    
+        requestAnimationFrame(smoothScroll);
+      }
+    
+      smoothScroll();
+    }
+    
+    // Watch the mfp-force-scrollbars class
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          const target = mutation.target;
+          if (target.classList.contains("mfp-force-scrollbars")) {
+            enableMouseScroll(target);
+          }
+        }
+      });
+    });
+    
+    // Watch mfp-wrap class
+    if (mfpWrap) {
+      observer.observe(mfpWrap, { attributes: true, attributeFilter: ["class"] });
+    }
   }
 
   // Restore the original theme color when the lightbox is closed.
